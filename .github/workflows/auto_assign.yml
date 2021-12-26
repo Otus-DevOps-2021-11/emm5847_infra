@@ -1,5 +1,12 @@
 # Set to true to add assignees to pull requests
 name: Auto Assign
+
+on:
+  push:
+    branches-ignore: main
+  pull_request:
+    branches-ignore: main
+
 addAssignees: true
 
 # A list of reviewers to be added to pull requests (GitHub user name)
