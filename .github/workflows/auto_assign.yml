@@ -4,8 +4,6 @@ name: Auto Assign
 on:
   push:
     branches-ignore: main
-  pull_request:
-    branches-ignore: main
 
 addAssignees: true
 
