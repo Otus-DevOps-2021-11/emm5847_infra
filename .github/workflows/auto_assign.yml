@@ -1,4 +1,5 @@
 # Set to true to add assignees to pull requests
+name: Auto Assign
 addAssignees: true
 
 # A list of reviewers to be added to pull requests (GitHub user name)
