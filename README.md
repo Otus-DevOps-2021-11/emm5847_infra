@@ -20,8 +20,6 @@ ssh someinternalhost
 
 bastion_IP = 84.201.185.214
 someinternalhost_IP = 10.128.0.25
-bastion_PROTO = udp
-bastion_PORT = 12950
 
 4. Install Let's Encrypt Certificate
 
