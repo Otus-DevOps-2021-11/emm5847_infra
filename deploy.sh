@@ -17,5 +17,6 @@ then
     echo "Application is started"
 else
     echo "Application is not started"
+    exit 1
 fi
 
