@@ -13,6 +13,6 @@ yc compute instance create \
   --metadata-from-file user-data=app.yaml
 
 
-testapp_IP = 62.84.114.209
+testapp_IP = 51.250.6.67
 testapp_port = 9292
 
