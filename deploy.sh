@@ -10,13 +10,11 @@ cd reddit && bundle install
 
 puma -d
 
-PID_PUMA=$(pidof puma)
-
-if [[ $PID_PUMA ]]
+if [[ $? == 0 ]]
 then
-    echo "Application is started"
+    echo "Applications is successfully started"
 else
-    echo "Application is not started"
-    exit 1
+    echo "Can't start application"
 fi
 
+ps aux | grep puma

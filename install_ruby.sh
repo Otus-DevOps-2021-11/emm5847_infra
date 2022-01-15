@@ -8,5 +8,9 @@ sudo apt install -y ruby-full ruby-bundler build-essential
 
 ruby -v && bundler -v
 
-[[ $? != 0 ]] && { echo "Installation error"; exit 1 }
-
+if [[ $? == 0 ]]
+then
+  echo "Ruby is successfully installed"
+else
+  echo "Ruby installation error"
+fi

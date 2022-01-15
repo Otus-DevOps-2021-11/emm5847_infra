@@ -9,8 +9,6 @@ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongod
 
 sudo apt-get update && sudo apt-get install -y mongodb-org
 
-[[ $? != 0 ]] && { echo "Installation error"; exit 1 }
-
 sudo systemctl start mongod
 sudo systemctl enable mongod
 
@@ -20,6 +18,5 @@ if [[ $? == 0 ]]
 then
     echo "Mongodb is successfully started"
 else
-    echo "Error with mongod service"
+    echo "Mongod istallation error"
 fi
-
