@@ -23,7 +23,7 @@ Description=Run reddit application
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/puma --dir /opt/reddit
+ExecStart=/usr/local/bin/puma --dir $app_dir/reddit
 Restart=on-failure
 
 [Install]
