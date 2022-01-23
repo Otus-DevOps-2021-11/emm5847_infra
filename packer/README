@@ -1,0 +1,6 @@
+Домашнее задание 7
+
+1. Установлено приложение reddit на ВМ в облаке yandex
+2. Некоторые параметры шаблона вынесены в отдельный файл variables.json, файл variables.json добавлен в .gitignore
+3. Создан полный образ для Immutable infrastructure
+4. Создан скрипт create-reddit-vm.sh для создания ВМ с запущенным приложением reddit
