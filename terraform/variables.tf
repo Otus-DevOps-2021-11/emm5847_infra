@@ -30,4 +30,8 @@ variable "private_key_path" {
   description = "Path to the private key used for ssh access"
   default     = "/home/home/.ssh/appuser"
 }
+variable "app_port" {
+  description = "Application port"
+  default = 9292
+}
 
