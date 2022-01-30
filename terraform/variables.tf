@@ -34,7 +34,7 @@ variable "app_port" {
   description = "Application port"
   default     = 9292
 }
-variable "count" {
+variable "app_instance_count" {
   description = "Count of instance"
   default     = 1
 }
