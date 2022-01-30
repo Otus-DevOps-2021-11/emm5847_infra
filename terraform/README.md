@@ -22,4 +22,5 @@ output "external_ip_address_load_balancer" {
   value = yandex_alb_load_balancer.app-balancer.listener[0].endpoint[0].address[0].external_ipv4_address[0].address
 }
 
-
+3. Код изменен так, чтобы управлять количеством создаваемых инстансов через переменную в variables.tf
+Добавлена переменна count, по умолчанию она равна 1

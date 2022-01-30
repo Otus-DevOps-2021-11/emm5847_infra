@@ -53,20 +53,17 @@ resource "yandex_alb_virtual_host" "app-virtual-host" {
 resource "yandex_alb_target_group" "app-target-group" {
   name = "reddit-target-group"
 
-  target {
-    subnet_id  = var.subnet_id
-    ip_address = yandex_compute_instance.app.network_interface.0.ip_address
-  }
-
-  target {
-    subnet_id  = var.subnet_id
-    ip_address = yandex_compute_instance.app2.network_interface.0.ip_address
+  dynamic "target" {
+    for_each = { for instance_app in yandex_compute_instance.app : instance_app.network_interface.0.ip_address => instance_app }
+    content {
+      subnet_id  = var.subnet_id
+      ip_address = target.key
+    }
   }
 }
 
 resource "yandex_alb_backend_group" "app-backend-group" {
   name = "reddit-backend-group"
-
   http_backend {
     name             = "reddit-http-backend"
     weight           = 1
@@ -77,17 +74,17 @@ resource "yandex_alb_backend_group" "app-backend-group" {
       panic_threshold = 0
     }
 
-  healthcheck {
-    timeout = "1s"
-    interval = "1s"
-    healthy_threshold = "2"
-    unhealthy_threshold = "1"
-    healthcheck_port = var.app_port
+    healthcheck {
+      timeout             = "1s"
+      interval            = "1s"
+      healthy_threshold   = "2"
+      unhealthy_threshold = "1"
+      healthcheck_port    = var.app_port
 
-    http_healthcheck {
-      path  = "/"
+      http_healthcheck {
+        path = "/"
+      }
     }
-  }
 
     http2 = "false"
   }

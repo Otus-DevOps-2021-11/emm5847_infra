@@ -32,6 +32,9 @@ variable "private_key_path" {
 }
 variable "app_port" {
   description = "Application port"
-  default = 9292
+  default     = 9292
 }
-
+variable "count" {
+  description = "Count of instance"
+  default     = 1
+}
