@@ -1,10 +1,11 @@
-#terraform {
-#  required_providers {
-#    yandex = {
-#      source = "yandex-cloud/yandex"
-#    }
-#  }
-#}
+terraform {
+  required_providers {
+    yandex = {
+      source = "yandex/yandex"
+    }
+  }
+}
+
 provider "yandex" {
   cloud_id                 = var.cloud_id
   folder_id                = var.folder_id
