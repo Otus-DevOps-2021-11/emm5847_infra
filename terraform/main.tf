@@ -1,4 +1,5 @@
 provider "yandex" {
+  version                  = "~0.86.0"
   cloud_id                 = var.cloud_id
   folder_id                = var.folder_id
   zone                     = var.zone
@@ -6,8 +7,8 @@ provider "yandex" {
 }
 
 resource "yandex_compute_instance" "app" {
-  name  = "reddit-app"
-  zone  = var.zone
+  name = "reddit-app"
+  zone = var.zone
   resources {
     core_fraction = 5
     cores         = 2
