@@ -53,13 +53,18 @@ resource "yandex_alb_virtual_host" "app-virtual-host" {
 resource "yandex_alb_target_group" "app-target-group" {
   name = "reddit-target-group"
 
-  dynamic "target" {
-    for_each = { for instance_app in yandex_compute_instance.app : instance_app.network_interface.0.ip_address => instance_app }
-    content {
+    target {
       subnet_id  = var.subnet_id
-      ip_address = target.key
+      ip_address = yandex_compute_instance.app.network_interface.0.ip_address 
     }
-  }
+  
+  #dynamic "target" {
+   # for_each = { for instance_app in yandex_compute_instance.app : instance_app.network_interface.0.ip_address => instance_app }
+    #content {
+     # subnet_id  = var.subnet_id
+      #ip_address = target.key
+    #}
+  #}
 }
 
 resource "yandex_alb_backend_group" "app-backend-group" {
