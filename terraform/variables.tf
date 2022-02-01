@@ -8,7 +8,7 @@ variable "folder_id" {
 }
 variable "zone" {
   description = "Zone"
-  default     = "ru-central1-a"
+  default     = "ru-central1"
 }
 variable "public_key_path" {
   description = "Path to the public key used for ssh access"
@@ -36,5 +36,5 @@ variable "app_port" {
 }
 variable "app_instance_count" {
   description = "Count of instance"
-  default     = 1
+  default     = 2
 }

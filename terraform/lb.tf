@@ -1,97 +1,45 @@
-resource "yandex_alb_load_balancer" "app-balancer" {
-  name = "reddit-load-balancer"
-
-  network_id = "enpm5ehu9lm25svnfmdi"
-
-  allocation_policy {
-    location {
-      zone_id   = var.zone
-      subnet_id = var.subnet_id
-    }
-  }
+resource "yandex_lb_network_load_balancer" "app-balancer" {
+  name      = "reddit-load-balancer"
+  region_id = "ru-central1"
 
   listener {
+    port = var.app_port
     name = "reddit-lst"
-    endpoint {
-      address {
-        external_ipv4_address {
-        }
-      }
-      ports = [var.app_port]
+
+    external_address_spec {
     }
-    http {
-      handler {
-        http_router_id = yandex_alb_http_router.app-http-router.id
-      }
-    }
-  }
-}
 
-resource "yandex_alb_http_router" "app-http-router" {
-  name      = "reddit-router"
-  folder_id = var.folder_id
-  labels = {
-    tf-label    = "reddit-label"
-    empty-label = ""
-  }
-}
-
-resource "yandex_alb_virtual_host" "app-virtual-host" {
-  name           = "reddit-virtual-host"
-  http_router_id = yandex_alb_http_router.app-http-router.id
-  route {
-    name = "reddit-my-route"
-    http_route {
-      http_route_action {
-        backend_group_id = yandex_alb_backend_group.app-backend-group.id
-        timeout          = "3s"
-      }
-    }
-  }
-}
-
-resource "yandex_alb_target_group" "app-target-group" {
-  name = "reddit-target-group"
-
-  target {
-    subnet_id  = var.subnet_id
-    ip_address = yandex_compute_instance.app.network_interface.0.ip_address
   }
 
-  #dynamic "target" {
-  # for_each = { for instance_app in yandex_compute_instance.app : instance_app.network_interface.0.ip_address => instance_app }
-  #content {
-  # subnet_id  = var.subnet_id
-  #ip_address = target.key
-  #}
-  #}
-}
-
-resource "yandex_alb_backend_group" "app-backend-group" {
-  name = "reddit-backend-group"
-  http_backend {
-    name             = "reddit-http-backend"
-    weight           = 1
-    port             = var.app_port
-    target_group_ids = ["${yandex_alb_target_group.app-target-group.id}"]
-
-    load_balancing_config {
-      panic_threshold = 0
-    }
+  attached_target_group {
+    target_group_id = "${yandex_lb_target_group.app-target-group.id}"
 
     healthcheck {
-      timeout             = "1s"
-      interval            = "1s"
+      name                = "reddit-app-healthcheck"
+      timeout             = "1"
+      interval            = "2"
       healthy_threshold   = "2"
-      unhealthy_threshold = "1"
-      healthcheck_port    = var.app_port
+      unhealthy_threshold = "2"
 
-      http_healthcheck {
+      http_options {
+        port = var.app_port
         path = "/"
       }
     }
+  }
+}
 
-    http2 = "false"
+resource "yandex_lb_target_group" "app-target-group" {
+  name = "reddit-target-group"
+
+  region_id = "ru-central1"
+
+  dynamic "target" {
+    for_each = { for instance_app in yandex_compute_instance.app : instance_app.network_interface.0.ip_address => instance_app }
+    content {
+      subnet_id  = var.subnet_id
+      address = target.key
+    }
   }
 }
 
