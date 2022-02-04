@@ -1,0 +1,71 @@
+#cloud-config
+  users:
+    - name: ubuntu
+      groups: sudo
+      shell: /bin/bash
+      sudo: ['ALL=(ALL) NOPASSWD:ALL']
+      ssh-authorized-keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDhV/MmUsuw4akdI755wWsDDtsrsrgM/HQqyO6trU79FwiP80mVNH4dW1yF7epkc+dKUhSgzXuztOXIAaTbYjuoNT0WwIbQnp4hGML93gq5Kdur+RerClJrz5pZlOAQUlNX5257Lc8F0+EJduDIvTspY3R9eeBHh1Xr2apxhLl8I1xorV0U7OIakt/6oxFKHIIq37PShLK4FUSQ9sTIsBNxQEL5WJVSb5eQScHCgriqKkYrfjDt7EIGo9N8wdk+CCBSe29A77mdyFk/iF0emHzKcM02dmKkMMwFWztnQXW5BDFRLPHYnu2BFa5Wz2SffwJA5WU2WznHUNCIheD4lhvH home@abc
+  write_files:
+    - path: /var/lib/cloud/scripts/per-boot/deploy_app.sh
+      permissions: '0755'
+      content: |
+        #!/bin/bash
+        #
+        #Deploy application
+        #
+
+        function install_ruby {
+          sudo apt update
+          sudo apt install -y ruby-full ruby-bundler build-essential
+
+          ruby -v && bundler -v
+
+            if [[ $? == 0 ]]
+            then
+              echo "Ruby is successfully installed"
+            else
+              echo "Ruby installation error"
+            fi
+        }
+
+        function install_mongodb {
+          wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+          echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" | \
+            sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+
+          sudo apt-get update && sudo apt-get install -y mongodb-org
+
+          sudo systemctl start mongod
+          sudo systemctl enable mongod
+
+          systemctl is-enabled mongod && systemctl is-active mongod
+
+          if [[ $? == 0 ]]
+          then
+              echo "Mongodb is successfully started"
+          else
+              echo "Error with mongod service"
+          fi
+        }
+
+        function run_application {
+          sudo apt install -y git
+          git clone -b monolith https://github.com/express42/reddit.git
+          cd reddit && bundle install
+
+          puma -d
+
+          if [[ $? == 0 ]]
+          then
+              echo "Applications is successfully started"
+          else
+              echo "Can't start application"
+          fi
+
+          ps aux | grep puma
+        }
+
+        install_ruby
+        install_mongodb
+        run_application
