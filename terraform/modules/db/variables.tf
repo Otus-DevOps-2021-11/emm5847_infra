@@ -14,4 +14,8 @@ variable "db_disk_image" {
   description = "Disk image for reddit db"
   default = "fd82a6h5hbhupbfjv0ej"
 }
+variable "db_subnet_id" {
+  description = "Subnet id for reddit db"
+  default = "enpm5ehu9lm25svnfmdi"
+}
 

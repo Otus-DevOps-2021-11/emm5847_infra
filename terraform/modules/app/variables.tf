@@ -14,4 +14,8 @@ variable app_disk_image {
   description = "Disk image for reddit app"
   default = "fd8uctatbblim7fetecj"
 }
+variable app_subnet_id {
+  description = "Subnet id for reddit app"
+  default = "enpm5ehu9lm25svnfmdi"
+}
 

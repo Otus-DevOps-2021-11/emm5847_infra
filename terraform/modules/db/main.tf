@@ -15,7 +15,7 @@ resource "yandex_compute_instance" "db" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.app-subnet.id
+    subnet_id = var.db_subnet_id
     nat       = true
   }
 
@@ -23,13 +23,13 @@ resource "yandex_compute_instance" "db" {
     ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
 
-  connection {
-    type        = "ssh"
-    host        = self.network_interface.0.nat_ip_address
-    user        = "ubuntu"
-    agent       = false
-    private_key = file(var.private_key_path)
-  }
+#  connection {
+#    type        = "ssh"
+#    host        = self.network_interface.0.nat_ip_address
+#    user        = "ubuntu"
+#    agent       = false
+#    private_key = file(var.private_key_path)
+#  }
 
 #  provisioner "file" {
 #    source      = "files/puma.service"
