@@ -36,5 +36,14 @@ variable "app_port" {
 }
 variable "app_instance_count" {
   description = "Count of instance"
-  default     = 2
+  default     = 1
 }
+variable app_disk_image {
+  description = "Disk image for reddit app"
+  default = "fd8uctatbblim7fetecj"
+}
+variable db_disk_image {
+  description = "Disk image for reddit db"
+  default = "fd82a6h5hbhupbfjv0ej"
+}
+
