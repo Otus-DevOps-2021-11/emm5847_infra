@@ -28,3 +28,11 @@ output "external_ip_address_load_balancer" {
 4. Код изменен так, чтобы управлять количеством создаваемых инстансов через переменную в variables.tf
 Добавлена переменна app_instance_count, по умолчанию она равна 1
 
+
+Homework 9
+
+В первой части задания реализовано хранение state файла в Yandex Object
+
+Созданы две директории
+В директории prod state файл хранится локально
+В директории stage state файл хранится в Yandex Object
