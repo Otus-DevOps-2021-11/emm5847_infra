@@ -22,22 +22,23 @@ resource "yandex_compute_instance" "db" {
   metadata = {
     ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
+}
 
-#  connection {
-#    type        = "ssh"
-#    host        = self.network_interface.0.nat_ip_address
-#    user        = "ubuntu"
-#    agent       = false
-#    private_key = file(var.private_key_path)
-#  }
+resource "null_resource" "provisioners" {
+  count = var.enable_deploy_db ? 1 : 0
+  triggers = {
+    yandex_instance_ids = join(",", yandex_compute_instance.db.*.id)
+  }
+  connection {
+    type        = "ssh"
+    host        = element(yandex_compute_instance.db.*.network_interface.0.nat_ip_address, 0)
+    user        = "ubuntu"
+    agent       = false
+    private_key = file(var.private_key_path)
+  }
 
-#  provisioner "file" {
-#    source      = "files/puma.service"
-#    destination = "/tmp/puma.service"
-#  }
-
-#  provisioner "remote-exec" {
-#    script = "files/deploy.sh"
-#  }
+  provisioner "remote-exec" {
+    script = "../modules/db/mongodb.sh"
+  }
 }
 

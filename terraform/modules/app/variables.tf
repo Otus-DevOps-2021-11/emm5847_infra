@@ -18,4 +18,12 @@ variable app_subnet_id {
   description = "Subnet id for reddit app"
   default = "enpm5ehu9lm25svnfmdi"
 }
+variable db_url {
+  description = "Connectiong url"
+  default = "127.0.0.1:27017"
+}
+variable enable_deploy_app {
+  description = "Deploy app or not"
+  default = "true"
+}
 

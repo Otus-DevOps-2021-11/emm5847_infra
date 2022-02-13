@@ -18,4 +18,8 @@ variable "db_subnet_id" {
   description = "Subnet id for reddit db"
   default = "enpm5ehu9lm25svnfmdi"
 }
+variable "enable_deploy_db" {
+  description = "Deploy db server or not"
+  default = "true"
+}
 

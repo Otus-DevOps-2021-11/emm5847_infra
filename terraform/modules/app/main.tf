@@ -22,22 +22,37 @@ resource "yandex_compute_instance" "app" {
   metadata = {
     ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
+}
 
-#  connection {
-#    type        = "ssh"
-#    host        = self.network_interface.0.nat_ip_address
-#    user        = "ubuntu"
-#    agent       = false
-#    private_key = file(var.private_key_path)
-#  }
+resource "null_resource" "provisioners" {
+  count = var.enable_deploy_app ? 1 : 0
 
-#  provisioner "file" {
-#    source      = "files/puma.service"
-#    destination = "/tmp/puma.service"
-#  }
+  triggers = {
+    yandex_instance_ids = join(",", yandex_compute_instance.app.*.id)
+  }
+  connection {
+    type        = "ssh"
+    host        = element(yandex_compute_instance.app.*.network_interface.0.nat_ip_address, 0)
+    user        = "ubuntu"
+    agent       = false
+    private_key = file(var.private_key_path)
+  }
 
-#  provisioner "remote-exec" {
-#    script = "files/deploy.sh"
-#  }
+  provisioner "file" {
+    source      = "../modules/app/puma.service"
+    destination = "/tmp/puma.service"
+  }
+
+  provisioner "file" {
+    source      = "../modules/app/deploy.sh"
+    destination = "/tmp/deploy.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod u+x /tmp/deploy.sh",
+      "/tmp/deploy.sh $HOME ${var.db_url}",
+    ]
+  }
 }
 

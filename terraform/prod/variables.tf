@@ -46,4 +46,8 @@ variable db_disk_image {
   description = "Disk image for reddit db"
   default     = "fd82a6h5hbhupbfjv0ej"
 }
+variable enable_provision {
+  description = "Enable provision"
+  default     = "false"
+}
 
