@@ -6,6 +6,5 @@
 lb2.tf
 main2.tf
 *.backup
-stage/backend.tf
-prod/backend.tf
+backend.tf
 
