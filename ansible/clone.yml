@@ -1,6 +1,6 @@
 ---
 - name: Clone
-  hosts: appserver
+  hosts: all
   tasks:
     - name: Clone repo
       git:
