@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 #
 #Install mongodb
 #
@@ -29,3 +29,4 @@ then
 else
     echo "Mongod istallation error"
 fi
+
