@@ -1,6 +1,6 @@
 ---
 - name: Deploy app
-  hosts: reddit_app
+  hosts: app
   tags: deploy-tag
   become: true
   tasks:
