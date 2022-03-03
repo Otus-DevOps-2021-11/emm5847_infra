@@ -16,7 +16,7 @@ compose:
 
 keyed_groups:
   # Place hosts in groups named by folder_id.
-  - key: labels['group']
+  - key: name
     prefix: ''
     separator: ''
   #parent_group: app
