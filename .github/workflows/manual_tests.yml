@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Run tests
-      run: echo "Hello, World!""
+      run: echo "Hello, World!"
 
     - name: Check packer templates
       run: find packer/ ! -name "variables.json" -a ! -name "key.json" -a -name "*.json" \
