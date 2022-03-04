@@ -1,0 +1,15 @@
+name: Manual tests for homework
+
+on:
+  push:
+    branches-ignore: main
+  pull_request:
+    branches-ignore: main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run tests
+      run: Echo hello, world!
