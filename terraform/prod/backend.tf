@@ -4,8 +4,8 @@ terraform {
     bucket     = "tf-bucket-11022022"
     region     = "us-east-1"
     key        = "terraform.tfstate"
-    access_key = "hSd34USU3qNoebgrrZMG"
-    secret_key = "l1Tip2GLiD_RuSNE3TXdsrYk3aiOLiY3DiXCriJB"
+    access_key = "6d__pBkuPXXzB42vbY_-"
+    secret_key = "p8SjS1_eko1NlvbHFKEmfTTxnFX15G_uorzpLmAO"
 
     skip_region_validation      = true
     skip_credentials_validation = true
