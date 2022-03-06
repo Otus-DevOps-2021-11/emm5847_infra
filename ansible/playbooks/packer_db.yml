@@ -1,6 +1,6 @@
 ---
 - name: Install MongoDB 4.4
-  hosts: all
+  hosts: localhost
   become: true
   tasks:
   - name: Wait 1 minute

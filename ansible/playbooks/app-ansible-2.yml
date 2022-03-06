@@ -1,6 +1,6 @@
 ---
 - name: Configure App
-  hosts: app
+  hosts: localhost
   become: true
   vars:
     db_host: 10.128.0.15

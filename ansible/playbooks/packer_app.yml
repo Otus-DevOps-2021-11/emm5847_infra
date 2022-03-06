@@ -1,6 +1,6 @@
 ---
 - name: Install Ruby && Bundler
-  hosts: all
+  hosts: localhost
   become: true
   tasks:
   - name: Wait 1 minute

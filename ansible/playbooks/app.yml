@@ -1,6 +1,6 @@
 ---
 - name: Configure App
-  hosts: app
+  hosts: localhost
   become: true
   roles:
     - app
