@@ -26,4 +26,4 @@ jobs:
     #  run: cd terraform/stage/ && terraform init && terraform validate
 
     - name: Check ansible playbooks
-      run: cd ansible && ansible-lint playbooks/*
+      run: cd ansible && pip install ansible-lint && ansible-lint playbooks/*
