@@ -6,10 +6,6 @@ on:
   pull_request:
     branches-ignore: main
 
-builds:
-  before_install:
-    - pip install ansible ansible-lint
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -30,4 +26,4 @@ jobs:
     #  run: cd terraform/stage/ && terraform init && terraform validate
 
     - name: Check ansible playbooks
-      run: cd ansible && ansible-lint playbooks/*
+      run: cd ansible && pip install ansible ansible-lint && ansible-lint playbooks/*
