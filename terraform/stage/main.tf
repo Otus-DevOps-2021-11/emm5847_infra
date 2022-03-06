@@ -1,4 +1,4 @@
-provider "yandex" {
+provider "yandex-cloud" {
 #  version                  = "~> 0.56"
   cloud_id                 = var.cloud_id
   folder_id                = var.folder_id
