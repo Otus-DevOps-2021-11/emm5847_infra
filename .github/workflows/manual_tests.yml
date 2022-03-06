@@ -23,4 +23,8 @@ jobs:
       run: find packer/ ! -name "variables.json" -a ! -name "key.json" -a -name "*.json" -type f -print0 | xargs -0 -n1 packer validate -syntax-only
 
     - name: Check terraform stage templates
-      run: cd terraform/stage/ && terraform validate
+      run: cd terraform/stage/ && terraform init && terraform validate
+
+    - name: Check ansible playbooks
+      run: cd ansible && ansible-lint playbooks/*
+      
