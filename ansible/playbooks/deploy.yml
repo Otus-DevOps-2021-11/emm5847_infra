@@ -1,6 +1,6 @@
 ---
 - name: Deploy app
-  hosts: all
+  hosts: app
   tags: deploy-tag
   become: true
   tasks:
