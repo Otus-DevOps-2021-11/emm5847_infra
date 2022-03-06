@@ -6,8 +6,9 @@ on:
   pull_request:
     branches-ignore: main
 
-before_install:
-  - pip install ansible ansible-lint
+build:
+  before_install:
+    - pip install ansible ansible-lint
 
 jobs:
   test:
