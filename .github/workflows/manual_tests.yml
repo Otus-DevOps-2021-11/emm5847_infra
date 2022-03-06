@@ -11,8 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Run tests
-      run: echo "Hello, World!"
+    - name: Checkout this repo
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref }}
 
     - name: Check terraform stage templates
       run: pwd && ls -l
