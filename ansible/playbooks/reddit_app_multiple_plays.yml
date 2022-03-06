@@ -1,6 +1,6 @@
 ---
 - name: Configure MongoDB
-  hosts: localhost
+  hosts: all
   tags: db-tag
   become: true
   vars:
@@ -19,7 +19,7 @@
     service: name=mongod state=restarted
 
 - name: Configure App
-  hosts: localhost
+  hosts: all
   tags: app-tag
   become: true
   vars:
@@ -47,7 +47,7 @@
     systemd: name=puma state=reloaded
 
 - name: Deploy app
-  hosts: localhost
+  hosts: all
   tags: deploy-tag
   become: true
   tasks:

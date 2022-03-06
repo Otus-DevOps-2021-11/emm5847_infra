@@ -1,6 +1,6 @@
 ---
 - name: Clone
-  hosts: localhost
+  hosts: all
   tasks:
     - name: Clone repo
       git:
