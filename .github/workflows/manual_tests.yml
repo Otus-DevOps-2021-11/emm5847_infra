@@ -15,8 +15,7 @@ jobs:
       run: echo "Hello, World!"
 
     - name: Check packer templates
-      run: find packer/ ! -name "variables.json" -a ! -name "key.json" -a -name "*.json" \
-           -type f -print0 | xargs -0 -n1 packer validate -syntax-only
+      run: find packer/ ! -name "variables.json" -a ! -name "key.json" -a -name "*.json" -type f -print0 | xargs -0 -n1 packer validate -syntax-only
 
     - name: Check terraform stage templates
       run: cd terraform/stage/ && terraform validate
