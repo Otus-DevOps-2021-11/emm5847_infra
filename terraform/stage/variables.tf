@@ -40,11 +40,11 @@ variable "app_instance_count" {
 }
 variable app_disk_image {
   description = "Disk image for reddit app"
-  default     = "fd8uctatbblim7fetecj"
+  default     = "fd8l6klbouscgli2re15"
 }
 variable db_disk_image {
   description = "Disk image for reddit db"
-  default     = "fd82a6h5hbhupbfjv0ej"
+  default     = "fd84vuhqrv32rtlsosan"
 }
 variable enable_provision {
   description = "Enable provision"

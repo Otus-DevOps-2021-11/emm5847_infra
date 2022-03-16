@@ -1,0 +1,28 @@
+plugin: yc_compute
+folders:
+  - b1gsn46bhh43i65o0lio
+filters:
+  - status == 'RUNNING'
+#  - labels['role'] == 'db'
+auth_kind: serviceaccountfile
+service_account_file: /home/home/Documents/DevOPS/HomeWork/key.json
+hostnames:
+        #- fqdn
+  - public_ip
+compose:
+  # Set ansible_host to the Public IP address to connect to the host.
+  # For Private IP use "network_interfaces[0].primary_v4_address.address".
+  ansible_host: network_interfaces[0].primary_v4_address.one_to_one_nat.address
+
+keyed_groups:
+  # Place hosts in groups named by folder_id.
+  - key: labels['group']
+    prefix: ''
+    separator: ''
+  #parent_group: app
+  # Place hosts in groups named by value of labels['group'].
+  #- key: labels['group']
+
+#groups:
+   # Place hosts in 'ssd' group if they have appropriate disk_type label.
+   #app: labels['name'] == 'reddit_app'
