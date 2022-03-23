@@ -1,0 +1,8 @@
+---
+- name: stop puma
+  become: yes
+  systemd: name=puma state=stopped
+
+- name: start puma
+  become: yes
+  systemd: name=puma state=started
