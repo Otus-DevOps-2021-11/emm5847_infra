@@ -1,8 +1,4 @@
 ---
-- name: stop puma
+- name: reload puma
   become: yes
-  systemd: name=puma state=stopped
-
-- name: start puma
-  become: yes
-  systemd: name=puma state=started
+  systemd: name=puma state=restarted

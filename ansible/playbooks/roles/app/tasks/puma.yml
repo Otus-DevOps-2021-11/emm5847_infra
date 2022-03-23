@@ -6,7 +6,6 @@
     owner: root
     group: root
     mode: '0644'
-  notify: reload puma
 
 - name: Add config for DB connection
   template:
@@ -19,3 +18,4 @@
 - name: enable puma
   become: yes
   systemd: name=puma enabled=yes
+  notify: reload puma
