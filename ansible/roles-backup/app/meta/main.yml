@@ -1,9 +1,7 @@
 galaxy_info:
-  role_name: db_role
-  namespace: my_namespace
   author: My name
   description: your role description
-  company: My your company
+  company: My company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -30,7 +28,7 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-  - name: All Linux distributions
+  - name: All Linux ditributives
     versions:
     - all
   #   - 25
