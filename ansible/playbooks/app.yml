@@ -1,7 +1,15 @@
 ---
 - name: Configure App
   hosts: app
-  become: true
+  become: yes
+  vars:
+    nginx_sites:
+      default:
+        - listen 80
+        - server_name "reddit"
+        - location / {
+            proxy_pass http://127.0.0.1:9292;
+          }
   roles:
     - app
-      #    - jdauphant.nginx
+#   - jdauphant.nginx

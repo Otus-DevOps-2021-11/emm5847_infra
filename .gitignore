@@ -1,3 +1,9 @@
 variables.json
 jdauphant.nginx
 backend.tf
+.vagrant/
+*.log
+*.pyc
+.molecule
+.cache
+.pytest_cache

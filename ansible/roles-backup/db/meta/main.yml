@@ -1,6 +1,4 @@
 galaxy_info:
-  role_name: db_role
-  namespace: my_namespace
   author: My name
   description: your role description
   company: My your company
